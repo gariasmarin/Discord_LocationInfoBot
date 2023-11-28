@@ -1,19 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
+import wikipedia
+from transformers import pipeline
+import time
+from datetime import datetime, timedelta
+
+# import pywikibot
+# site = pywikibot.Site('en', 'wikipedia')
 
 
-page = requests.get("https://en.wikipedia.org/wiki/Raleigh,_North_Carolina")
+# summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+#
+# abstract = wikipedia.summary("Raleigh, North Carolina")
+#
+# print(summarizer(abstract, max_length=250, min_length=100, do_sample=False))
 
-soup = BeautifulSoup(page.content, 'html.parser')
 
-list(soup.children)
-
-# find all occurrence of p in HTML
-# includes HTML tags
-print(soup.find_all('p'))
-
-print('\n\n')
-
-# return only text
-# does not include HTML tags
-print(soup.find_all('p')[0].get_text())
+raleigh = wikipedia.WikipediaPage(title="Raleigh, North Carolina", preload=True)
+print(raleigh.sections)
